@@ -1,0 +1,306 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-http-equiv="X-UA-Compatible"
+    content="ie-edge">
+    <link href="{% static 'style2.css' %}" rel="stylesheet">
+    <link href="{% static 'editprofile.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>BookFace</title>
+  </head>
+  <body class="full-height-grow">
+    <div class="container">
+      <header class="main-header">
+        <a href="{% url 'home' %}" class="brand-logo">
+          <img src="{% static 'Logo.png' %}">
+          <div class="brand-logo-name">BookFace</div>
+        </a>
+        <nav class="main-nav">
+          <ul>
+            <li class="input2">
+              <ul>
+                <li><input class="search" type="text" placeholder="Search.." name="search"></li>
+              </ul>
+            </li>
+            <li><a href="{% url 'bookpage_url' %}">Books</a></li>
+            <li><a href="{% url 'checkout_url' %}">Cart</a></li>
+            <li><a href="{% url 'profile_url' %}">MyAccount</a></li>
+            <li><a href="{% url 'logout_url' %}">Logout</a></li>
+          </ul>
+        </nav>
+      </header>
+</div>
+<div class="main-body">
+  <div class="rows">
+
+    <div class="col-halfs">
+      <div class="container6">
+        <div class="rows">
+            <div class="field icon">
+              <div class="propic">
+              <img src="{% static 'profilepic.webp' %}" alt="">
+              </div>
+            </div>
+        </div>
+       {% for info in infos %}
+        {% if info.email == user.email %}
+
+        <div class="rows">
+          <div class="col-halfs">
+                <h4>User Name:</h4>
+                <div class="field">
+                    <p id="fname">{{info.fname}}  {{info.lname}}</p>
+                </div>
+          </div>
+         
+          <div class="col-halfs">
+            <h4>Status:</h4>
+              <div class="field icon">
+                {% if info.status == True %}
+                <p id="status"><span id="status-color" class="subtitle-stock">Registered</span></p>
+                {% else%}
+                <p id="status"><span id="status-color" class="subtitle-stock">Unregistered</span></p>
+                {% endif %}
+            </div>
+          </div>
+        </div>
+     
+        <div class="rows">
+          <h4><i class="fa fa-address-card-o"></i> Address:</h4>
+          {% for addy in addys %}
+          {% if info.id == addy.users_id %}
+            <p id="street">{{addy.street}} {{addy.city}}, {{addy.state}} {{addy.zipcode}} </p>
+          {% endif %}
+          {% endfor %}
+        </div>
+
+        <div class="rows">
+          <div class="col-halfs">
+              <h4>Phone number:</h4>
+            <div class="field icon">
+              <p id="email">{{info.phone}}</p>
+            </div>
+          </div>
+        </div>
+  
+        <div class="rows">
+          <form id="remove-card-form" method ="POST">
+            {% csrf_token %}
+          <h4>Payment Details:</h4>
+          <div class="field icon">
+            <p>Credit Card:</p>
+          </div>
+            <div class="field">
+              <select id="credit-numbers" name="credit-numbers">
+                {% for creditscard in creditscards %}
+                {% if info.id == creditscard.users_id %}
+                <option>{{creditscard.cardnumber}}</option>
+                {% endif %}
+                {% endfor %}
+              </select>
+            </div>
+            <div class="field">
+              <button type= "submit" class="btn" value="remove" name="remove">Remove</button>
+            </div>
+            </form>
+        </div>
+
+        <div class="rows">
+          <div class="col-halfs">
+              <h4>Email Address:</h4>
+            <div class="field icon">
+              <p id="email">{{user.email}}</p>
+            </div>
+          </div>
+          <div class="col-halfs">
+              <h4>Order History:</h4>
+            <div class="field icon">
+              <a href="{% url 'orderhistory_url' %}" class="btn">Order History</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="rows">
+          <form method="POST">
+            {% csrf_token %}
+          <h4>Promotions:</h4>
+          {% if info.promotion is False %}
+          <div class="field">
+            <input id="True" name="True" value="True" type="checkbox"/>
+            <label for="True">I wish to subscribe to Promotions</label>
+          </div>
+          <div class="field">
+            <button type= "submit" class="btn" value="subscribe" name="subscribe">Submit</button>
+          </div>
+          {% else %}
+          <div class="field">
+            <input id="False" name="False" value="False" type="checkbox"/>
+            <label for="False">I wish to unsubscribe to Promotions</label>
+          </div>
+          <div class="field">
+            <button type= "submit" class="btn" value="unsubscribe" name="unsubscribe">Submit</button>
+          </div>
+          {% endif %}
+          </form>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+ {% endfor %}
+    <div class="col-halfs">
+      <div class="container7">
+        <div class="rows">
+          <form id="account-form" method="POST">
+            {% csrf_token %}
+            <h4>Change First Name:</h4>
+            <p></p>
+              <div class="field icon">
+                <input name="fname3" id="fname3" type="text" placeholder="First Name" /required>
+                <div class="style-icon"><i class="fa fa-user"></i></div>
+              </div>
+              <div class="field">
+                <button type="submit" name="changeF" value="changeF" class="btn" >Change</button>
+              </div>
+          </form>
+        </div>
+        <div class="rows">
+          <form id="account-form" method="POST">
+            {% csrf_token %}
+            <h4>Change Last Name:</h4>
+            <p></p>
+              <div class="field icon">
+                <input name="lname3" id="lname3" type="text" placeholder="Last Name" /required>
+                <div class="style-icon"><i class="fa fa-user"></i></div>
+              </div>
+              <div class="field">
+                <button type="submit" name="changeL" value="changeL" class="btn" >Change</button>
+              </div>
+          </form>
+        </div>
+        <div class="rows">
+          <form id="account-form" method="POST">
+            {% csrf_token %}
+            <h4>Change Telephone Number:</h4>
+            <p></p>
+              <div class="field icon">
+                <input name="phone2" id="phone2" type="tel" placeholder="Phone Number" /required>
+                <div class="style-icon"><i class="fa fa-phone"></i></div>
+              </div>
+              <div class="field">
+                <button type="submit" name="changeP" value="changeP" class="btn" >Change</button>
+              </div>
+          </form>
+        </div>
+        <div class="rows">
+          <form id="address-form" method="POST">
+            {% csrf_token %}
+          <h4>Change Address:</h4>
+          <div class="col-halfs">
+            <div class="field icon">
+              <div>
+                <input name="street" id="street" type="text" placeholder="Street"/required>
+                  <div class="style-icon"><i class="fa fa-address-card-o"></i></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-halfs">
+            <div class="field">
+              <div class="col-thirds">
+                <input name="city" id="city" type="text" placeholder="City"/required>
+              </div>
+              <div class="col-thirds">
+                <input name="state" id="state" type="text" placeholder="State"/ required>
+              </div>
+              <div class="col-thirds">
+                <input name="zip" id="zip" type="text" placeholder="Zip"/ required>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <button type="submit" name="addAddy" value="addAddy" class="btn">Change Address</button>
+          </div>
+          </form>
+        </div>
+
+<form id="add-card-form" method="POST">
+    {% csrf_token %}
+        <div class="rows">
+          <h4>Add New Credit Card:</h4>
+          <div class="field icon">
+            <input type="number" name="cardnumber" id="cardnumber" placeholder="Card Number"/required>
+            <div class="style-icon"><i class="fa fa-credit-card-alt"></i></div>
+          </div>
+          <div class="col-halfs">
+            <div class="field">
+              <select name="day" id="day" required>
+                <option>01 Jan</option>
+                <option>02 Feb</option>
+                <option>03 Mar</option>
+                <option>04 Apr</option>
+                <option>05 May</option>
+                <option>06 Jun</option>
+                <option>07 Jul</option>
+                <option>08 Aug</option>
+                <option>09 Sep</option>
+                <option>10 Oct</option>
+                <option>11 Nov</option>
+                <option>12 Dec</option>
+              </select>
+              <select name="year" id="year" required>
+                <option>2020</option>
+                <option>2021</option>
+                <option>2022</option>
+                <option>2023</option>
+                <option>2024</option>
+                <option>2025</option>
+                <option>2026</option>
+                <option>2027</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-halfs">
+            <div class="field icon">
+              <input type="password" name="cvc" id="cvc" placeholder="Card CVC"/ required>
+              <div class="style-icon"><i class="fa fa-lock"></i></div>
+            </div>
+          </div>
+        </div>
+        <div class="rows">
+          <div class="field">
+            <button type= "submit" name="addCard" value="addCard" class="btn">Add New Card</button>
+          </div>
+        </div>
+</form>
+
+      </div>
+    </div>
+  </div>
+</div>
+    <footer class="main-footer">
+      <div class="container">
+        <nav class="footer-nav">
+          <ul>
+            <li><a href='#'>About Us</a></li>
+            <li><a href='#'>Contact Us</a></li>
+          </ul>
+        </nav>
+        <nav class="footer-nav">
+          <ul>
+            <li>
+              <a href='#' class="social-link">
+                <img src="{% static 'twitter.svg' %}">
+                Twitter
+              </a>
+            </li>
+            <li>
+              <a href='#' class="social-link"><img src="{% static 'youtube.svg' %}">Youtube</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

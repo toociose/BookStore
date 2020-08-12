@@ -1,0 +1,112 @@
+.row {
+    display: -ms-flexbox; /* IE10 */
+    display: flex;
+    -ms-flex-wrap: wrap; /* IE10 */
+    flex-wrap: wrap;
+    margin-top: 20px;
+
+  }
+  h4 {
+    color: #FFB13C;
+    font-size: 30px;
+    padding:0;
+    margin:0;
+  }
+
+
+  .checkout-container {
+    padding: 40px;
+    margin:0;
+    background-color: #26333F;
+    font-family: Roboto,sans-serif;
+    font-size: 1.2rem;
+    color:white;
+    background-color: #1B2229;
+      border-radius: 30px;
+      margin-bottom: 20px;
+  }
+
+  .checkout-container input[type=text] {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  .container10 {
+    padding: 2em;
+    max-width: 30em;
+    background-color: #1B2229;
+    border-radius: 30px;
+    margin: 5em 0em 5em 10em;
+  }
+  .container11 {
+    padding: 3em 3em 3em 3em;
+    max-width: 120em;
+    background-color: #1B2229;
+    border-radius: 30px;
+    margin: 5em 10em 5em -9em;
+  }
+
+  .icon-container {
+    margin-bottom: 20px;
+    padding: 7px 0;
+    font-size: 24px;
+  }
+  .checkout-container ul{
+    display: flex;
+    margin-bottom: 10px;
+    padding:0;
+    list-style:none;
+  }
+  .checkout-container ul li{
+    color:inherit;
+    text-decoration: none;
+    margin-right: 20px;
+    padding-right:50px;
+  }
+
+  .checkout-container p a {
+    color: #2196F3;
+  }
+
+
+  span.price {
+    float: right;
+    color: grey;
+  }
+  .btn2{
+    color:white;
+    background-color: #F59300;
+    padding: .15rem .5rem;
+    border-radius: .5rem;
+    text-decoration: none;
+    font-size: .9rem;
+    outline:none;
+    border: none;
+    cursor: pointer;
+  }
+  .btn2:hover{
+    background-color:#FFB13C;
+  }
+  .btn2:focus{
+    background-color:#FFB13C;
+  }
+  .subtitle2{
+    font-weight: 500;
+    font-size: 1.2em;
+    color:#FFB13C;
+
+  }
+  .street{
+    color: white;
+  }
+  /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (also change the direction - make the "cart" column go on top) */
+  @media (max-width: 800px) {
+    .row {
+      flex-direction: column-reverse;
+    }
+    .col-25 {
+      margin-bottom: 20px;
+    }
+  }

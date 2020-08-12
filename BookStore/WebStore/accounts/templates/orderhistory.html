@@ -1,0 +1,113 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="{% static 'style2.css' %}" rel="stylesheet">
+
+<link href="{% static 'orderhistory.css' %}" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="main-header">
+          <a href="{% url 'home' %}" class="brand-logo">
+            <img src="{% static 'Logo.png' %}">
+            <div class="brand-logo-name">BookFace</div>
+          </a>
+          <nav class="main-nav">
+            <ul>
+              <li class="input2">
+                <ul>
+                  <li><input class="search" type="text" placeholder="Search.." name="search"></li>
+                </ul>
+              </li>
+              <li><a href="{% url 'bookpage_url' %}">Books</a></li>
+              <li><a href="{% url 'checkout_url' %}">Cart</a></li>
+              <li><a href="{% url 'profile_url' %}">MyAccount</a></li>
+              <li><a href="{% url 'logout_url' %}">Logout</a></li>
+            </ul>
+          </nav>
+        </header>
+    </div>
+    
+<div class="col-25">
+    <div class="checkout-container">
+      <form id="Reorder" name ="Reorder" method="POST">
+        <input id="prodId" name="prodId" type="hidden" value="xm234jq">
+      </form>
+      {% for usah in listofUsers %} 
+        {% if usah.email == user.email %}
+          {% for a in addie %} 
+            {%if a.users.id == usah.id%}
+            {%for order in listofOrders%}
+              {% if order.userid.id == usah.id %}
+      <h4>Order History  <span class="price1">Order Status</span> <span class="price2">Address</span> <span class="price3">Name</span> 
+        <span class="price3">Price Total</span><span class="price"><input type="submit" value="Re-Order" class="btn"></span>
+        
+        
+      </h4>
+      <a href="#">Order ID: {{order.id}}</a>
+                {% for tz in tranzactions %} 
+                  {% if tz.orderid.id == order.id %}
+                    {%for bk in listofBooks%}
+                      {%if bk.bookid == tz.bookid.bookid%}
+        <ul>
+          <li class>
+            <a href="#">{{bk.title}}</a>
+          </li>
+          <li class="order">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${{bk.price}}
+          </li>
+        </ul>
+        <ul>
+          <li>Order Date: {{order.orderdatetime}}</li>
+          <li class="status-pending">In-Transit</li>
+          <li>Address: {{a.street}}&ensp;{{a.city}}&ensp;{{a.state}}&ensp;{{a.zipcode}}</li>
+          <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;{{usah.first_name}} &nbsp;&nbsp; {{usah.last_name}} </li>
+          <li class="total-price">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;${{order.grandtotal}}</li>
+            
+        </ul>
+        
+                        {%endif%} 
+                      {%endfor%}
+                    {%endif%}
+                  {% endfor %} 
+                {% endif %} 
+                <hr>
+              {% endfor %}
+            {%endif%}
+          {%endfor%}
+        {% endif %}
+      {% endfor %}  
+    
+  </div>
+</div>
+
+<footer class="main-footer">
+<div class="container">
+	<nav class="footer-nav">
+	<ul>
+		<li><a href='#'>About Us</a></li>
+		<li><a href='#'>Contact Us</a></li>
+	</ul>
+	</nav>
+	<nav class="footer-nav">
+	<ul>
+		<li>
+		<a href='#' class="social-link">
+			<img src="{% static 'twitter.svg' %}">
+			Twitter
+		</a>
+		</li>
+		<li>
+		<a href='#' class="social-link"><img src="{% static 'youtube.svg' %}">Youtube</a>
+		</li>
+	</ul>
+	</nav>
+</div>
+</footer>
+</body>
+</html>

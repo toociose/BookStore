@@ -1,0 +1,84 @@
+.wrapping h1{
+text-align:center;
+font-size: 35px;
+font-style: italic;
+}
+.wrapping h3{
+  text-align: center;
+  font-size: 30px;
+  font-style: italic;
+}
+.wrapping h4{
+  text-align: center;
+  font-size: 20px;
+  color:#364C61;
+}
+.img-area{
+  display: flex;
+  flex-wrap:  wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.img-area p{
+  text-align: center;
+  font-size: 30px;
+  font-style:italic;
+}
+.img-area i{
+  font-size: 100px;
+  color:#364C61;
+}
+i:hover{
+  transform: scale(1.1);
+}
+.one-img{
+  padding: 0 20px 20px;
+}
+img:hover{
+  transform: scale(1.005);
+}
+.whole-img{
+  flex-direction: row;
+  background-image: url('bookstore.jpg');
+  background-repeat: no-repeat;
+  background-attachment:fixed;
+  background-size: cover;
+  height: 600px;
+  opacity: .7;
+  margin-top: -100px;
+}
+.whole-img h2{
+  text-align: center;
+  color: orange;
+  font-size: 100px;
+  line-height: 600px;
+  padding:0;
+}
+.container4 {
+  position: relative;
+}
+.overlay {
+  position: absolute;
+  top:0;
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  width: 300px;
+  transition: .5s ease;
+  opacity:0;
+  color: white;
+  font-size: 20px;
+  padding: 20px;
+  text-align: center;
+}
+.container4:hover .overlay {
+  opacity: 1;
+}
+.Promotion-display{
+  background-color: #1B2229;
+  width: 400px;
+  padding: 2rem;
+  border-radius: 30px;
+  margin: 5px;
+}

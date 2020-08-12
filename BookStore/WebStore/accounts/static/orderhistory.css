@@ -1,0 +1,138 @@
+
+.checkout-container ul{
+  display: flex;
+  margin-bottom: 10px;
+  padding:0;
+  list-style:none;
+}
+.checkout-container ul li{
+  color:inherit;
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+.checkout-container .status-pending{
+  color: #FFFF00;
+}
+.checkout-container .status-delivered{
+  color: #39ff14;
+}
+span.price1 {
+	padding-left: 125px;
+
+}
+span.price2 {
+	padding: 50px;
+}
+span.price3 {
+	padding-left: 335px;
+}
+.row {
+    display: -ms-flexbox; /* IE10 */
+    display: flex;
+    -ms-flex-wrap: wrap; /* IE10 */
+    flex-wrap: wrap;
+    margin-top: 20px;
+
+  }
+
+  .col-25 {
+    -ms-flex: 50%; /* IE10 */
+    flex: 50%;
+  }
+
+  .col-50 {
+    -ms-flex: 50%; /* IE10 */
+    flex: 50%;
+  }
+
+  .col-75 {
+    -ms-flex: 75%; /* IE10 */
+    flex: 75%;
+  }
+
+  .col-25,
+  .col-50,
+  .col-75 {
+    padding: 0 16px;
+  }
+
+  .checkout-container {
+    padding: 40px;
+    margin:0;
+    background-color: #26333F;
+    font-family: Roboto,sans-serif;
+    font-size: 1.2rem;
+    color:white;
+    background-color: #1B2229;
+      border-radius: 30px;
+      margin-bottom: 20px;
+  }
+
+  .checkout-container input[type=text] {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+
+  label {
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .icon-container {
+    margin-bottom: 20px;
+    padding: 7px 0;
+    font-size: 24px;
+  }
+  .checkout-container ul{
+    display: flex;
+    margin-bottom: 10px;
+    padding:0;
+    list-style:none;
+  }
+  .checkout-container ul li{
+    color:inherit;
+    text-decoration: none;
+    margin-right: 20px;
+    padding-right:50px;
+  }
+	.checkout-container ul li.order{
+		color:white;
+		text-decoration: none;
+		margin-right: 20px;
+		padding-left:980px;
+	}
+	.checkout-container ul li.total-price{
+		color:white;
+		text-decoration: none;
+		margin-right: 20px;
+		padding-left: 190px;
+	}
+	.checkout-container ul li a {
+    color: orange;
+		text-decoration: none;
+  }
+
+
+	a{
+		color: #2196F3;
+
+	}
+
+
+  span.price {
+    float: right;
+    color: grey;
+  }
+	/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (also change the direction - make the "cart" column go on top) */
+  @media (max-width: 800px) {
+    .row {
+      flex-direction: column-reverse;
+    }
+    .col-25 {
+      margin-bottom: 20px;
+    }
+  }

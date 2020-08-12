@@ -1,0 +1,213 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="{% static 'style2.css' %}" rel="stylesheet">
+<link href="{% static 'checkout3.css' %}" rel="stylesheet">
+<link href="{% static 'editprofile.css' %}" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="main-header">
+            <a href="{% url 'home' %}" class="brand-logo">
+              <img src="{% static 'Logo.png' %}">
+              <div class="brand-logo-name">BookFace</div>
+            </a>
+            <nav class="main-nav">
+              <ul>
+                <li class="input2">
+                  <ul>
+                    <li><input class="search" type="text" placeholder="Search.." name="search"></li>
+                  </ul>
+                </li>
+                <li><a href="{% url 'bookpage_url' %}">Books</a></li>
+                <li><a href="{% url 'checkout_url' %}">Cart</a></li>
+                <li><a href="{% url 'profile_url' %}">MyAccount</a></li>
+                <li><a href="{% url 'logout_url' %}">Logout</a></li>
+              </ul>
+            </nav>
+        </header>
+    </div>
+    <br>
+    <br>
+
+    {% for info in infos %}
+        {% if info.email == user.email %}
+    <div class="rows">
+    <div class="col-halfs">
+        <div class="container10">
+        <div class="rows">
+        <h4>Cart <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b></b></span></h4>
+             {% for cart in carts %}
+                {% if cart.userid == info %}
+                    {% for cartitem in cartitems %}
+                        {% if cartitem.cartid == cart %}
+                            {% for book in books %}
+                                {% if book == cartitem.bookid %}
+                        <p><a href="{% url 'go_to_page' book.title %}" >{{book.title}} </a><span class="price">{{book.price}}</span></p>
+                        <a href="{% url 'remove_from_cart' book.title %}" class="btn2"> x</a>   
+                        <hr>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %} 
+                {% endif %}
+             {% endfor %}
+        </div>
+        <div class="rows">
+        {% for cart in carts %}
+         {% if cart.userid == info %}
+            {% for total in totals %}
+                {% if total.cartid == cart %}
+                {% if total.price <= 0 %}
+                <h4>Total: <span class="price" style="color:black"><b>$0 </b></span></h4>
+                {% else %}
+                <h4>Total: <span class="price" style="color:black"><b>${{total.price}} </b></span></h4>
+                {% endif %}
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            {% endfor %}
+
+            <hr>
+            <br>
+            <a href="{% url 'bookpage_url' %}" class="btn">Add Book</a>
+            </div>
+
+     <br>
+        <div class="rows">
+            <div class="col-halfs">
+                <form method="POST">
+                {% csrf_token %}
+              <h4>Promotions:</h4>
+              <div class="field">
+                <input name="promo" id="promo"type="text" placeholder="Promo Code">
+              </div>
+              <div class="field">
+                <button type= "submit" class="btn" value="applyPromo" name="applyPromo">Submit</button>
+              </div>
+              </form>
+            </div>
+        </div>
+
+        <div class="rows">
+            {% for addy in addys %}
+            {% if info.id == addy.users_id %}
+            <h4>Saved Address:</h4>
+                  <p class="street">{{addy.street}} {{addy.city}}, {{addy.state}} {{addy.zipcode}} </p>
+            {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="rows">
+            <form id="checkout" method ="POST">
+              {% csrf_token %}
+            <h4>Payment Details:</h4>
+              <div class="field">
+                <select id="credit-numbers" name="credit-numbers">
+                  {% for creditscard in creditscards %}
+                  {% if info.id == creditscard.users_id %}
+                  <option>{{creditscard.cardnumber}}</option>
+                  {% endif %}
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="field">
+                <button type= "submit" class="btn" value="checkout" name="checkout">Checkout</button>
+              </div>
+              </form>
+          </div>
+
+      </div>
+    </div>
+
+    <div class="col-halfs">
+        <div class="container11">
+        <div class="rows">
+            <form id="address-form" method="POST">
+              {% csrf_token %}
+            <h4>Change Address:</h4>
+            <div class="col-halfs">
+              <div class="field">
+                <div>
+                  <input name="street" id="street" type="text" placeholder="Street"/required>
+                </div>
+              </div>
+            </div>
+            <div class="col-halfs">
+              <div class="field">
+                <div class="col-thirds">
+                  <input name="city" id="city" type="text" placeholder="City"/required>
+                </div>
+                <div class="col-thirds">
+                  <input name="state" id="state" type="text" placeholder="State"/ required>
+                </div>
+                <div class="col-thirds">
+                  <input name="zip" id="zip" type="text" placeholder="Zip"/ required>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <button type="submit" name="addAddy" value="addAddy" class="btn">Change Address</button>
+            </div>
+            </form>
+          </div>
+
+    <div class="rows">           
+    <form id="add-card-form" method="POST">
+        {% csrf_token %}
+            <h4>Add New Credit Card:</h4>
+            <div class="field">
+              <input type="number" name="cardnumber" id="cardnumber" placeholder="Card Number"/required>
+            </div>
+            <div class="col-halfs">
+              <div class="field">
+                <select name="day" id="day" required>
+                  <option>01 Jan</option>
+                  <option>02 Feb</option>
+                  <option>03 Mar</option>
+                  <option>04 Apr</option>
+                  <option>05 May</option>
+                  <option>06 Jun</option>
+                  <option>07 Jul</option>
+                  <option>08 Aug</option>
+                  <option>09 Sep</option>
+                  <option>10 Oct</option>
+                  <option>11 Nov</option>
+                  <option>12 Dec</option>
+                </select>
+                <select name="year" id="year" required>
+                  <option>2020</option>
+                  <option>2021</option>
+                  <option>2022</option>
+                  <option>2023</option>
+                  <option>2024</option>
+                  <option>2025</option>
+                  <option>2026</option>
+                  <option>2027</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-halfs">
+              <div class="field">
+                <input type="password" name="cvc" id="cvc" placeholder="Card CVC"/ required>
+              </div>
+            </div>
+          </div>
+          <div class="rows">
+            <div class="field">
+              <button type= "submit" name="addCard" value="addCard" class="btn">Add New Card</button>
+            </div>
+          </div>
+  </form>
+  </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+</div>
+<br>
+</body>
+</html>

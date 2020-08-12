@@ -1,0 +1,178 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-http-equiv="X-UA-Compatible"
+    content="ie-edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="{% static 'style2.css' %}" rel="stylesheet">
+    <link href="{% static 'signup2.css' %}" rel="stylesheet">
+    <title>BookFace</title>
+  </head>
+  <body class="full-height-grow">
+    <div class="container">
+      <header class="main-header">
+        <a href="{% url 'home' %}" class="brand-logo">
+            <img src="{% static 'Logo.png' %}">
+          <div class="brand-logo-name">BookFace</div>
+        </a>
+        <nav class="main-nav">
+          <ul>
+            <li class="input2">
+              <ul>
+                <li><input class="search" type="text" placeholder="Search.." name="search"></li>
+              </ul>
+            </li>
+            <li><a href="{% url 'bookpage_url' %}">Books</a></li>
+            <li><a href="{% url 'login_url' %}">Cart</a></li>
+        <li><a href="{% url 'login_url' %}">MyAccount</a></li>
+        <li><a href="{% url 'login_url' %}">Login</a></li>
+            <li><a href="{% url 'register_url' %}">Sign Up</a></li>
+          </ul>
+        </nav>
+      </header>
+    </div>
+      <div class="main-body">
+      <div class="container4">
+        <form method="POST">
+          {% csrf_token %} 
+          <div class="rows">
+            <h4>Account</h4>
+            <div class="field icon">
+              <input name="fname" id="fname" type="text" placeholder="First Name"/ required>
+              <div class="style-icon"><i class="fa fa-user"></i></div>
+            </div>
+            <div class="field icon">
+              <input name="lname" id="lname" type="text" placeholder="Last Name"/ required>
+              <div class="style-icon"><i class="fa fa-user"></i></div>
+            </div>
+            <div class="field icon">
+              <input name="email" id="email" type="email" placeholder="Email Address"/ required>
+              <div class="style-icon"><i class="fa fa-envelope"></i></div>
+            </div>
+            <div class="field icon">
+              <input name="phone" id="phone" type="tel" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" placeholder="Phone Number"/ required>
+              <div class="style-icon"><i class="fa fa-phone"></i></div>
+            </div>
+            <div class="field icon">
+              <input name ="password" id="password" type="password" placeholder="Password"/ required>
+              <div class="style-icon"><i class="fa fa-key"></i></div>
+            </div>
+            <div class="field icon">
+              <input name="repassword" id="repassword" type="password" placeholder="ReType-Password"/ required>
+              <div class="style-icon"><i class="fa fa-key"></i></div>
+            </div>
+          </div>
+    
+          <div class="rows">
+            <h4>Address</h4>
+            <div class="col-halfs">
+              <div class="field icon">
+                <div>
+                  <input name="street" id="street" type="text" placeholder="Street"/>
+                    <div class="style-icon"><i class="fa fa-address-card-o"></i></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-halfs">
+              <div class="field">
+                <div class="col-thirds">
+                  <input name="city" id="city" type="text" placeholder="City"/>
+                </div>
+                <div class="col-thirds">
+                  <input name="state" id="state" type="text" placeholder="State"/>
+                </div>
+                <div class="col-thirds">
+                  <input name="zip" id="zip" type="text" placeholder="Zip"/>
+                </div>
+              </div>
+            </div>
+          </div>
+    
+          <div class="rows">
+            <h4>Payment Details</h4>
+            <div class="field icon">
+              <input type="number" name="cardnumber" id="cardnumber" placeholder="Card Number"/>
+              <div class="style-icon"><i class="fa fa-credit-card-alt"></i></div>
+            </div>
+            <div class="col-halfs">
+              <div class="field">
+                <select name="day" id="day">
+                  <option>01 Jan</option>
+                  <option>02 Feb</option>
+                  <option>03 Mar</option>
+                  <option>04 Apr</option>
+                  <option>05 May</option>
+                  <option>06 Jun</option>
+                  <option>07 Jul</option>
+                  <option>08 Aug</option>
+                  <option>09 Sep</option>
+                  <option>10 Oct</option>
+                  <option>11 Nov</option>
+                  <option>12 Dec</option>
+                </select>
+                <select name ="year" id="year">
+                  <option>2020</option>
+                  <option>2021</option>
+                  <option>2022</option>
+                  <option>2023</option>
+                  <option>2024</option>
+                  <option>2025</option>
+                  <option>2026</option>
+                  <option>2027</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-halfs">
+              <div class="field icon">
+                <input type="password" name="cvc" id="cvc" placeholder="Card CVC"/>
+                <div class="style-icon"><i class="fa fa-lock"></i></div>
+              </div>
+            </div>
+          </div>
+    
+          <div class="rows">
+            <h4>Promotions</h4>
+            <div class="field">
+              <input id="True" name="True" value="True" type="checkbox"/>
+              <label for="True">I wish to subscribe to Promotions</label>
+            </div>
+          </div>
+    
+          <div class="rows">
+            <div class="field">
+              <button type= "submit" class="btn">Register</button>
+              <a class="already" href="{% url 'login_url' %}">Already Have An Account?</a>
+            </div>
+          </div>
+    
+        </form>
+      </div>
+    </div>
+        <footer class="main-footer">
+          <div class="container">
+            <nav class="footer-nav">
+              <ul>
+                <li><a href='#'>About Us</a></li>
+                <li><a href='#'>Contact Us</a></li>
+              </ul>
+            </nav>
+            <nav class="footer-nav">
+              <ul>
+                <li>
+                  <a href='#' class="social-link">
+                    <img src="twitter.svg">
+                    Twitter
+                  </a>
+                </li>
+                <li>
+                  <a href='#' class="social-link"><img src="youtube.svg">Youtube</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </footer>
+      </body>
+    </html>
