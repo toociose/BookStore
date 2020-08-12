@@ -11,4 +11,5 @@ Use promotions
 Tools: Django, Postgresql, Python.
 This project taught me alot about database management as well as connecting the frontend to the backend through the model view controller architectural style. 
 In this case, model, template, view.
-![Screenshot](BookStore/Screenshot_2020-08-12 BookFace.png)
+
+![](images/Screenshot_2020-08-12 BookFace(1).png)
