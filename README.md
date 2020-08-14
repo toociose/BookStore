@@ -13,3 +13,5 @@ This project taught me alot about database management as well as connecting the 
 In this case, model, template, view.
 <img src="images/Screenshot_2020-08-12 BookFace(1).png">
 <img src = "images/Screenshot_2020-08-12 BookFace.jpg">
+
+Worked in the team as the database designer, and assisted with the creation of site functionality.
